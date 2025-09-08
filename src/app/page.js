@@ -1,95 +1,97 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import PostForm from './components/PostForm';
+import PostList from './components/PostList';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [posts, setPosts] = useState([]); // Estado para almacenar los posts
+  // Estados para el formulario de posts
+  const [selectedPost, setSelectedPost] = useState(null); // Estado para el post seleccionado
+  const [author, setAuthor] = useState('');
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  // useEffect para cargar los posts al montar el componente
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  // Función para obtener los posts
+  const fetchPosts = async () => {
+    const res = await fetch('/api/posts');
+    const data = await res.json();
+    setPosts(data);
+  };
+
+  // Función para manejar el envío del formulario
+  const handleSubmit = async (postData) => {
+    const url = selectedPost ? `/api/posts/${selectedPost.id}` : '/api/posts';
+    const method = selectedPost ? 'PUT' : 'POST';
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (!res.ok) {
+        throw new Error('Error al guardar el post');
+      }
+
+      // Limpiar el estado del post seleccionado
+      setSelectedPost(null);
+      
+      // Actualizar la lista de posts
+      fetchPosts();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // Función para eliminar un post
+  const handleDelete = async (id) => {
+    await fetch('/api/posts', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    fetchPosts();
+  };
+
+  // Función para editar un post
+  const handleEdit = (post) => {
+    setSelectedPost(post);
+    setAuthor(post.author);
+    setTitle(post.title);
+    setContent(post.content);
+  };
+
+
+
+  return (
+    <>
+    <Navbar />
+    <div className="container mx-auto p-4">        
+        <div className="row justify-content-center mb-5">
+            <div className="col-12 col-lg-5">
+              <PostForm 
+                onSubmit={handleSubmit} 
+                initialData={selectedPost || {}} 
+              />
+            </div>
+
+            <div className="col-12 col-lg-7">
+              <PostList 
+                posts={posts}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            </div >
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </>
   );
 }
