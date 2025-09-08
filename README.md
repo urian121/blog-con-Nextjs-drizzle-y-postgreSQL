@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Blog Moderno con Next.js, Drizzle y PostgreSQL
 
-## Getting Started
+Un sistema de gestión de contenido (CMS) para blogs moderno, rápido y escalable, desarrollado con tecnologías de vanguardia. Esta aplicación permite a los usuarios crear, leer, actualizar y eliminar publicaciones de blog de manera intuitiva, con una interfaz de usuario limpia y responsiva.
 
-First, run the development server:
+## 🌟 Características Principales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Interfaz de Usuario Moderna**: Diseño responsivo que se adapta a cualquier dispositivo móvil o de escritorio.
+- **Gestión Completa de Contenidos**: CRUD (Crear, Leer, Actualizar, Eliminar) de artículos del blog.
+- **Rendimiento Óptimo**: Desarrollado con Next.js para renderizado del lado del servidor (SSR) y generación estática (SSG).
+- **Base de Datos Robusta**: Utiliza PostgreSQL como base de datos principal con Drizzle ORM para un manejo de datos seguro y eficiente.
+- **API RESTful**: Endpoints bien definidos para integración con otros servicios o aplicaciones.
+- **Autenticación y Autorización**: Sistema seguro de gestión de usuarios (próximamente).
+- **Búsqueda y Filtrado**: Búsqueda de artículos por título, autor o contenido (próximamente).
+- **Categorías y Etiquetas**: Organización de contenido mediante categorías y etiquetas (próximamente).
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Frontend**: 
+  - Next.js 13+ con App Router
+  - React 18+
+  - Bootstrap 5 para estilos responsivos
+  - Bootstrap Icons para iconografía
+
+- **Backend**:
+  - API Routes de Next.js
+  - Drizzle ORM para la capa de base de datos
+  - PostgreSQL como base de datos relacional
+
+- **Herramientas de Desarrollo**:
+  - Node.js 18+
+  - npm / Yarn
+  - Git para control de versiones
+
+## 🚀 Empezando
+
+### Requisitos Previos
+
+- Node.js 18 o superior
+- PostgreSQL 12 o superior
+- npm 9 o superior, o Yarn
+
+### Instalación
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tuusuario/blog-nextjs-drizzle.git
+   cd blog-nextjs-drizzle
+   ```
+
+2. Instala las dependencias:
+   ```bash
+   npm install
+   # o
+   yarn
+   ```
+
+3. Configura las variables de entorno:
+   Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+   ```env
+   DATABASE_URL="postgresql://usuario:contraseña@localhost:5432/nombre_base_datos?schema=public"
+   ```
+
+4. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   # o
+   yarn dev
+   ```
+
+5. Abre tu navegador en [http://localhost:3000](http://localhost:3000)
+
+## 🏗️ Estructura del Proyecto
+
+```
+/src
+  /app
+    /api           # Rutas de la API
+    /components    # Componentes reutilizables
+    /styles        # Estilos globales
+  /drizzle        # Configuración de Drizzle ORM
+  /public         # Archivos estáticos
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Licencia
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🤝 Contribuciones
 
-## Learn More
+¡Las contribuciones son bienvenidas! Si tienes sugerencias o encuentras algún problema, por favor abre un issue o envía un pull request.
 
-To learn more about Next.js, take a look at the following resources:
+## 📬 Contacto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Autor**: Urian Viera
+- **Email**: tu@email.com
+- **GitHub**: [@tuusuario](https://github.com/tuusuario)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+Desarrollado con ❤️ por Urian Viera
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
