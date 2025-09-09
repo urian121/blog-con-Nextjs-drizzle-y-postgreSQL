@@ -1,56 +1,78 @@
 'use client';
 
-export default function PostList({ posts, onEdit, onDelete }) {
-  if (posts.length === 0) {
+export default function PostList({ posts = [], onEdit, onDelete }) {
+  if (!posts || posts.length === 0) {
     return (
-      <div className="alert alert-info">
-        <i className="bi bi-info-circle me-2"></i>
-        No hay posts disponibles. ¡Crea tu primer post!
+      <div className="alert alert-info d-flex align-items-center" role="alert">
+        <i className="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
+        <div>No hay publicaciones disponibles. ¡Crea tu primer post para comenzar!</div>
       </div>
     );
   }
 
+  const handleDelete = (e, id) => {
+    e.preventDefault();
+    if (window.confirm('¿Eliminar este post?')) {
+      onDelete(id);
+    }
+  };
+
+  const handleEdit = (e, post) => {
+    e.preventDefault();
+    onEdit(post);
+  };
+
   return (
-    <div className="row row-cols-1 row-cols-md-2 g-4">
-      <h2 className="h4 mb-4 text-center">Publicaciones Recientes</h2>
-      {posts.map((post) => (
-        <div key={post.id} className="col">
-          <div className="card h-100">
-            <div className="card-body">
-              <h5 className="card-title">{post.title}</h5>
-              <p className="card-text text-muted">
-                {post.content.length > 150 
-                  ? `${post.content.substring(0, 150)}...` 
-                  : post.content}
-              </p>
-              <div className="d-flex justify-content-end gap-2">
-                <button
-                  onClick={() => onEdit(post)}
-                  className="btn btn-outline-warning btn-sm"
-                >
-                  <i className="bi bi-pencil-square me-1"></i>
-                  Editar
-                </button>
-                <button
-                  onClick={() => onDelete(post.id)}
-                  className="btn btn-outline-danger btn-sm"
-                >
-                  <i className="bi bi-trash me-1"></i>
-                  Borrar
-                </button>
-              </div>
-            </div>
-            <div className="card-footer text-muted small">
-              <i className="bi bi-calendar3 me-1"></i>
-              {new Date(post.createdAt).toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </div>
-          </div>
-        </div>
-      ))}
+    <div className="table-responsive">
+      <table className="table table-hover align-middle">
+        <thead className="table-light">
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Contenido</th>
+            <th>Fecha</th>
+            <th className="text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {posts.map((post) => (
+            <tr key={post.id}>
+              <td className="fw-semibold">{post.title}</td>
+              <td>{post.author}</td>
+              <td>
+                <div className="text-truncate" style={{ maxWidth: '300px' }}>
+                  {post.content}
+                </div>
+              </td>
+              <td>
+                {new Date(post.createdAt).toLocaleDateString('es-ES', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </td>
+              <td className="text-end">
+                <div className="btn-group btn-group-sm">
+                  <button
+                    onClick={(e) => handleEdit(e, post)}
+                    className="btn btn-outline-primary"
+                    title="Editar"
+                  >
+                    <i className="bi bi-pencil"></i>
+                  </button>
+                  <button
+                    onClick={(e) => handleDelete(e, post.id)}
+                    className="btn btn-outline-danger"
+                    title="Eliminar"
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

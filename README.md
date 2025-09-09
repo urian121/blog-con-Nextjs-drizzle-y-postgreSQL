@@ -60,12 +60,27 @@ Un sistema de gestión de contenido (CMS) para blogs moderno, rápido y escalabl
    DATABASE_URL="postgresql://usuario:contraseña@localhost:5432/nombre_base_datos?schema=public"
    ```
 
-4. Inicia el servidor de desarrollo:
+4. Crea y aplica las migraciones a la base de datos:
+   ```bash
+   # Genera las migraciones basadas en el esquema
+   npm run db:generate
+   
+   # Aplica las migraciones a la base de datos
+   npm run db:push
+   ```
+
+5. Inicia el servidor de desarrollo:
    ```bash
    npm run dev
    # o
    yarn dev
    ```
+
+### Comandos útiles de Drizzle
+
+- `npm run db:generate`: Genera archivos de migración basados en los cambios del esquema
+- `npm run db:push`: Aplica los cambios del esquema directamente a la base de datos
+- `npm run db:studio`: Abre el cliente visual de Drizzle para explorar la base de datos
 
 5. Abre tu navegador en [http://localhost:3000](http://localhost:3000)
 

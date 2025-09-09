@@ -1,66 +1,93 @@
 'use client';
 
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export default function PostForm({ onSubmit, initialData = {} }) {
-  const [title, setTitle] = useState(initialData.title || '');
-  const [author, setAuthor] = useState(initialData.author || '');
-  const [content, setContent] = useState(initialData.content || '');
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      title: initialData.title || '',
+      author: initialData.author || '',
+      content: initialData.content || ''
+    }
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ title, author, content });
-    // Si es un nuevo post, limpiamos el formulario
+  const onSubmitForm = (data) => {
+    onSubmit(data);
     if (!initialData.id) {
-      setTitle('');
-      setAuthor('');
-      setContent('');
+      reset();
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 mb-4">
-      <h2 className="h4 mb-4">{initialData.id ? 'Editar' : 'Crear nuevo'} Post</h2>
-      <div className="mb-3">
-        <label htmlFor="title" className="form-label">Título</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="form-control"
-          required
-        />
+    <div className="card border-0 shadow-sm mb-4">
+      <div className="card-body">
+        <h5 className="card-title mb-4">
+          <i className="bi bi-pencil-square me-2"></i>
+          {initialData.id ? 'Editar' : 'Nuevo'} Post
+        </h5>
+        
+        <form onSubmit={handleSubmit(onSubmitForm)}>
+          <div className="mb-3">
+            <label htmlFor="title" className="form-label small text-muted mb-1">Título</label>
+            <input
+              type="text"
+              id="title"
+              {...register('title')}
+              className="form-control form-control-sm"
+              placeholder="Ingresa el título"
+            />
+          </div>
+          
+          <div className="mb-3">
+            <label htmlFor="author" className="form-label small text-muted mb-1">Autor</label>
+            <input
+              type="text"
+              id="author"
+              {...register('author')}
+              className="form-control form-control-sm"
+              placeholder="Nombre del autor"
+            />
+          </div>
+          
+          <div className="mb-3">
+            <label htmlFor="content" className="form-label small text-muted mb-1">Contenido</label>
+            <textarea
+              id="content"
+              {...register('content')}
+              className="form-control form-control-sm"
+              rows="4"
+              placeholder="Escribe el contenido del post..."
+            ></textarea>
+          </div>
+          
+          <div className="d-flex justify-content-end gap-2">
+            <button 
+              type="submit" 
+              className="btn btn-sm btn-primary px-3"
+            >
+              <i className="bi bi-save me-1"></i>
+              {initialData.id ? 'Actualizar' : 'Guardar'}
+            </button>
+            
+            {initialData.id && (
+              <button 
+                type="button" 
+                className="btn btn-sm btn-outline-secondary"
+                onClick={() => {
+                  setTitle('');
+                  setAuthor('');
+                  setContent('');
+                  if (typeof onSubmit === 'function') {
+                    onSubmit(null); // Clear selection
+                  }
+                }}
+              >
+                Cancelar
+              </button>
+            )}
+          </div>
+        </form>
       </div>
-      <div className="mb-3">
-        <label htmlFor="author" className="form-label">Autor</label>
-        <input
-          type="text"
-          id="author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          className="form-control"
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="content" className="form-label">Contenido</label>
-        <textarea
-          id="content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="form-control"
-          rows={4}
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        className={`btn btn-${initialData.id ? 'warning' : 'primary'}`}
-      >
-        <i className={`bi bi-${initialData.id ? 'pencil' : 'plus'}-square me-2`}></i>
-        {initialData.id ? 'Actualizar' : 'Crear'} Post
-      </button>
-    </form>
+    </div>
   );
 }
