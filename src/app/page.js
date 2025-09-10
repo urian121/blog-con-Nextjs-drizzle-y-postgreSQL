@@ -61,7 +61,6 @@ export default function Home() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('¿Estás seguro de eliminar esta publicación?')) return;
     
     try {
       const res = await fetch(`/api/posts/${id}`, { method: 'DELETE' });

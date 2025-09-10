@@ -2,6 +2,8 @@
 
 Un sistema de gestión de contenido (CMS) para blogs moderno, rápido y escalable, desarrollado con tecnologías de vanguardia. Esta aplicación permite a los usuarios crear, leer, actualizar y eliminar publicaciones de blog de manera intuitiva, con una interfaz de usuario limpia y responsiva.
 
+![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/refs/heads/master/blog-moderno-con-Nextjs-drizzle-y-PostgreSQL.png)
+
 ## 🌟 Características Principales
 
 - **Interfaz de Usuario Moderna**: Diseño responsivo que se adapta a cualquier dispositivo móvil o de escritorio.

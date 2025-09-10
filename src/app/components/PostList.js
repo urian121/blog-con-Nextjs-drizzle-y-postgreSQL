@@ -52,20 +52,22 @@ export default function PostList({ posts = [], onEdit, onDelete }) {
                 })}
               </td>
               <td className="text-end">
-                <div className="btn-group btn-group-sm">
+                <div className="d-flex gap-2 justify-content-end">
                   <button
                     onClick={(e) => handleEdit(e, post)}
-                    className="btn btn-outline-primary"
+                    className="btn btn-sm btn-outline-primary d-flex align-items-center"
                     title="Editar"
                   >
-                    <i className="bi bi-pencil"></i>
+                    <i className="bi bi-pencil me-1"></i>
+                    <span className="d-none d-md-inline">Editar</span>
                   </button>
                   <button
                     onClick={(e) => handleDelete(e, post.id)}
-                    className="btn btn-outline-danger"
+                    className="btn btn-sm btn-outline-danger d-flex align-items-center"
                     title="Eliminar"
                   >
-                    <i className="bi bi-trash"></i>
+                    <i className="bi bi-trash me-1"></i>
+                    <span className="d-none d-md-inline">Eliminar</span>
                   </button>
                 </div>
               </td>

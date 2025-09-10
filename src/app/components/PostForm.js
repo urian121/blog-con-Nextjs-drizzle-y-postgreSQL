@@ -1,15 +1,25 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 export default function PostForm({ onSubmit, initialData = {} }) {
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
+      title: '',
+      author: '',
+      content: ''
+    }
+  });
+
+  // Actualizar formulario cuando cambien los datos iniciales
+  useEffect(() => {
+    reset({
       title: initialData.title || '',
       author: initialData.author || '',
       content: initialData.content || ''
-    }
-  });
+    });
+  }, [initialData, reset]);
 
   const onSubmitForm = (data) => {
     onSubmit(data);
@@ -34,7 +44,6 @@ export default function PostForm({ onSubmit, initialData = {} }) {
               id="title"
               {...register('title')}
               className="form-control form-control-sm"
-              placeholder="Ingresa el título"
             />
           </div>
           
@@ -45,7 +54,6 @@ export default function PostForm({ onSubmit, initialData = {} }) {
               id="author"
               {...register('author')}
               className="form-control form-control-sm"
-              placeholder="Nombre del autor"
             />
           </div>
           
@@ -56,7 +64,6 @@ export default function PostForm({ onSubmit, initialData = {} }) {
               {...register('content')}
               className="form-control form-control-sm"
               rows="4"
-              placeholder="Escribe el contenido del post..."
             ></textarea>
           </div>
           
@@ -74,9 +81,6 @@ export default function PostForm({ onSubmit, initialData = {} }) {
                 type="button" 
                 className="btn btn-sm btn-outline-secondary"
                 onClick={() => {
-                  setTitle('');
-                  setAuthor('');
-                  setContent('');
                   if (typeof onSubmit === 'function') {
                     onSubmit(null); // Clear selection
                   }

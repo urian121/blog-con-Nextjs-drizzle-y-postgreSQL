@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm';
 // GET: Obtener un post por ID
 export async function GET(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const post = await db.select().from(posts).where(eq(posts.id, id));
     
     if (post.length === 0) {
@@ -28,7 +28,7 @@ export async function GET(request, { params }) {
 // PUT: Actualizar un post
 export async function PUT(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { title, author, content } = await request.json();
     
     const updatedPost = await db.update(posts)
@@ -55,7 +55,7 @@ export async function PUT(request, { params }) {
 // DELETE: Eliminar un post
 export async function DELETE(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const deletedPost = await db.delete(posts)
       .where(eq(posts.id, id))
       .returning();
