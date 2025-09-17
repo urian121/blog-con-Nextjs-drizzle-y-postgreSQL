@@ -18,7 +18,7 @@ Un sistema de gestión de contenido (CMS) para blogs moderno, rápido y escalabl
 ## 🛠️ Tecnologías Utilizadas
 
 - **Frontend**: 
-  - Next.js 13+ con App Router
+  - Next.js 15+ con App Router
   - React 18+
   - Bootstrap 5 para estilos responsivos
   - Bootstrap Icons para iconografía
@@ -35,18 +35,12 @@ Un sistema de gestión de contenido (CMS) para blogs moderno, rápido y escalabl
 
 ## 🚀 Empezando
 
-### Requisitos Previos
-
-- Node.js 18 o superior
-- PostgreSQL 12 o superior
-- npm 9 o superior, o Yarn
-
 ### Instalación
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tuusuario/blog-nextjs-drizzle.git
-   cd blog-nextjs-drizzle
+   git clone https://github.com/urian121/blog-con-Nextjs-drizzle-y-postgreSQL
+   cd blog-con-Nextjs-drizzle-y-postgreSQL
    ```
 
 2. Instala las dependencias:
@@ -98,10 +92,6 @@ Un sistema de gestión de contenido (CMS) para blogs moderno, rápido y escalabl
   /public         # Archivos estáticos
 ```
 
-## 📝 Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
 ## 🤝 Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si tienes sugerencias o encuentras algún problema, por favor abre un issue o envía un pull request.
@@ -109,8 +99,7 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 ## 📬 Contacto
 
 - **Autor**: Urian Viera
-- **Email**: tu@email.com
-- **GitHub**: [@tuusuario](https://github.com/tuusuario)
+- **Email**: urian1213viera@gmail.com
 
 ---
 
