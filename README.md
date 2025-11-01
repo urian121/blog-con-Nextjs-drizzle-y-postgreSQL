@@ -100,9 +100,3 @@ Un sistema de gestión de contenido (CMS) para blogs moderno, rápido y escalabl
 
 - **Autor**: Urian Viera
 - **Email**: urian1213viera@gmail.com
-
----
-
-Desarrollado con ❤️ por Urian Viera
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
